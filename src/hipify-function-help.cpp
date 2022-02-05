@@ -17,7 +17,7 @@ using namespace clang::tooling;
 
 int num_functions;
 
-std::map<std::string, std::pair<int,int>> name_to_args;
+std::map<std::string, std::pair<std::vector<std::string>, std::pair<int, int>>> name_to_args;
 
 DeclarationMatcher functions = functionDecl().bind("fxn");
 
@@ -26,9 +26,9 @@ public:
   ASTContext* context;
 
   void dump_map() {
-    for (std::pair<std::string, std::pair<int,int>> entry : name_to_args) {
-      printf("%s has %d to %d args\n", entry.first.c_str(), entry.second.first, entry.second.second);
-    }
+    // for (std::pair<std::string, std::pair<std::vector<std::string>, std::pair<int, int>>> entry : name_to_args) {
+    //   printf("%s has %d to %d args\n", entry.first.c_str(), entry.second.first, entry.second.second);
+    // }
   }
 
   void run(const MatchFinder::MatchResult& result) override {
@@ -47,25 +47,29 @@ public:
 
     // printf("%s has %d to %d args\n", func_name.c_str(), min_params, num_params);
 
-    // if it doesn't exist, add it
     if (name_to_args.find(func_name) == name_to_args.end()) {
-      name_to_args[func_name] = {min_params, num_params};
-    }
-    else { // if it does exist, possibly update
-      if (name_to_args[func_name].first > min_params) {
-        name_to_args[func_name].first = min_params;
+      for (ParmVarDecl* param : func->parameters()) {
+        name_to_args[func_name].first.push_back(param->getType().getAsString());
       }
-      if (name_to_args[func_name].second < num_params) {
-        name_to_args[func_name].second = num_params;
-      }
+      name_to_args[func_name].second = {min_params, num_params};
     }
   }
 
-  void onEndOfTranslationUnit() override {
-    printf("std::map<std::string, std::pair<int,int>> name_to_args = {\n");
+  std::string dump_arg_vector(std::pair<std::string, std::pair<std::vector<std::string>, std::pair<int, int>>> entry) {
+    std::vector<std::string> args = entry.second.first;
+    std::string retval = "";
+    for (std::string arg : args) {
+      retval += "\"" + arg + "\", ";
+    }
+    return retval;
+  }
 
-    for (std::pair<std::string, std::pair<int,int>> entry : name_to_args) {
-      printf("{\"%s\", {%d, %d}},\n", entry.first.c_str(), entry.second.first, entry.second.second);
+  void onEndOfTranslationUnit() override {
+    printf("std::map<std::string, std::pair<std::vector<std::string>, std::pair<int, int>>> name_to_args = {\n");
+
+    for (std::pair<std::string, std::pair<std::vector<std::string>, std::pair<int, int>>> entry : name_to_args) {
+      printf("{\"%s\", {{%s}, {%d, %d}}},\n", entry.first.c_str(), dump_arg_vector(entry).c_str(),
+        entry.second.second.first, entry.second.second.second);
     }
 
     printf("};\n");

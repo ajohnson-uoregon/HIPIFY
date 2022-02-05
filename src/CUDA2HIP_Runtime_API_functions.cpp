@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all CUDA Runtime API functions
-const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
+std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // 1. Device Management
   // no analogue
   {"cudaChooseDevice",                                        {"hipChooseDevice",                                        "", CONV_DEVICE, API_RUNTIME, 1}},
@@ -870,7 +870,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaSetupArgument",                                       {"hipSetupArgument",                                       "", CONV_EXECUTION, API_RUNTIME, 37, CUDA_REMOVED}},
 };
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
+std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaDeviceGetNvSciSyncAttributes",                        {CUDA_102, CUDA_0,   CUDA_0  }},
   {"cudaDeviceGetP2PAttribute",                               {CUDA_80,  CUDA_0,   CUDA_0  }},
   {"cudaCtxResetPersistingL2Cache",                           {CUDA_110, CUDA_0,   CUDA_0  }},
@@ -1082,7 +1082,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaGraphNodeSetEnabled",                                 {CUDA_116, CUDA_0,   CUDA_0  }},
 };
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
+std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipChooseDevice",                                         {HIP_1060, HIP_0,    HIP_0   }},
   {"hipDeviceGetAttribute",                                   {HIP_1060, HIP_0,    HIP_0   }},
   {"hipDeviceGetByPCIBusId",                                  {HIP_1060, HIP_0,    HIP_0   }},
@@ -1291,7 +1291,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipGraphExecEventWaitNodeSetEvent",                       {HIP_5000, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
-const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
+std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
   {1, "Device Management"},
   {2, "Thread Management [DEPRECATED]"},
   {3, "Error Handling"},

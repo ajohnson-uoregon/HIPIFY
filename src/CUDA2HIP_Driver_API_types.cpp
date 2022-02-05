@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps the names of CUDA DRIVER API types to the corresponding HIP types
-const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
+std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
 
   // 1. Structs
 
@@ -2157,7 +2157,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_TRSF_SEAMLESS_CUBEMAP",                                         {"HIP_TRSF_SEAMLESS_CUBEMAP",                                "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x40
 };
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
+std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CU_CTX_BLOCKING_SYNC",                                             {CUDA_0,   CUDA_40,  CUDA_0  }},
   {"CUDA_EXTERNAL_MEMORY_BUFFER_DESC_st",                              {CUDA_100, CUDA_0,   CUDA_0  }},
   {"CUDA_EXTERNAL_MEMORY_BUFFER_DESC",                                 {CUDA_100, CUDA_0,   CUDA_0  }},
@@ -2756,7 +2756,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CU_TRSF_SEAMLESS_CUBEMAP",                                         {CUDA_116, CUDA_0,   CUDA_0  }},
 };
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
+std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"HIP_LAUNCH_PARAM_BUFFER_POINTER",                                  {HIP_1060, HIP_0,    HIP_0   }},
   {"HIP_LAUNCH_PARAM_BUFFER_SIZE",                                     {HIP_1060, HIP_0,    HIP_0   }},
   {"HIP_LAUNCH_PARAM_END",                                             {HIP_1060, HIP_0,    HIP_0   }},

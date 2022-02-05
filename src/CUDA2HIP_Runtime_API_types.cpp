@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps the names of CUDA RUNTIME API types to the corresponding HIP types
-const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
+std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
 
   // 1. Structs
 
@@ -1835,7 +1835,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaArraySparsePropertiesSingleMipTail",                           {"hipArraySparsePropertiesSingleMipTail",                    "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x1
 };
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP {
+std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP {
   {"cudaEglFrame",                                                     {CUDA_91,  CUDA_0,   CUDA_0  }},
   {"cudaEglFrame_st",                                                  {CUDA_91,  CUDA_0,   CUDA_0  }},
   {"cudaEglPlaneDesc",                                                 {CUDA_91,  CUDA_0,   CUDA_0  }},
@@ -2265,7 +2265,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaGraphExecUpdateErrorAttributesChanged",                        {CUDA_116, CUDA_0,   CUDA_0  }},
 };
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
+std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipHostRegisterDefault",                                           {HIP_1060, HIP_0,    HIP_0   }},
   {"hipArrayDefault",                                                  {HIP_1070, HIP_0,    HIP_0   }},
   {"hipFuncAttribute",                                                 {HIP_3090, HIP_0,    HIP_0   }},

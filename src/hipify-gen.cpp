@@ -483,7 +483,7 @@ int main() {
 
   std::map<llvm::StringRef, hipCounter> cuda_type_map;
   cuda_type_map.insert(CUDA_RUNTIME_TYPE_NAME_MAP.begin(), CUDA_RUNTIME_TYPE_NAME_MAP.end());
-  cuda_type_map.insert(CUDA_DRIVER_TYPE_NAME_MAP.begin(), CUDA_DRIVER_TYPE_NAME_MAP.end());
+  // cuda_type_map.insert(CUDA_DRIVER_TYPE_NAME_MAP.begin(), CUDA_DRIVER_TYPE_NAME_MAP.end());
 
 
   for (std::pair<llvm::StringRef, hipCounter> type_map : cuda_type_map) {
@@ -699,7 +699,7 @@ int main() {
         else {
           kernels_out << "0";
         }
-        if (j != p-1 || numargs > 0) {
+        if (j < 3 || numargs > 0) {
           kernels_out << ", ";
         }
       }

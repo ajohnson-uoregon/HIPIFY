@@ -161,7 +161,7 @@ std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUeglStreamConnection",                                            {"hipEglStreamConnection *",                                 "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
   // the same - CUevent_st
-  {"CUevent_st",                                                       {"ihipEvent_t",                                              "", CONV_TYPE, API_DRIVER, 1}},
+  // {"CUevent_st",                                                       {"ihipEvent_t",                                              "", CONV_TYPE, API_DRIVER, 1}},
   // cudaEvent_t
   {"CUevent",                                                          {"hipEvent_t",                                               "", CONV_TYPE, API_DRIVER, 1}},
 
@@ -2088,7 +2088,7 @@ std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaInvalidDeviceId ((int)-1)
   {"CU_DEVICE_INVALID",                                                {"hipInvalidDeviceId",                                       "", CONV_DEFINE, API_DRIVER, 1}}, // ((CUdevice)-2)
   // CUDA_IPC_HANDLE_SIZE
-  {"CU_IPC_HANDLE_SIZE",                                               {"HIP_IPC_HANDLE_SIZE",                                      "", CONV_DEFINE, API_DRIVER, 1}}, // 64
+  // {"CU_IPC_HANDLE_SIZE",                                               {"HIP_IPC_HANDLE_SIZE",                                      "", CONV_DEFINE, API_DRIVER, 1}}, // 64
   {"CU_LAUNCH_PARAM_BUFFER_POINTER",                                   {"HIP_LAUNCH_PARAM_BUFFER_POINTER",                          "", CONV_DEFINE, API_DRIVER, 1}}, // ((void*)0x01)
   {"CU_LAUNCH_PARAM_BUFFER_SIZE",                                      {"HIP_LAUNCH_PARAM_BUFFER_SIZE",                             "", CONV_DEFINE, API_DRIVER, 1}}, // ((void*)0x02)
   {"CU_LAUNCH_PARAM_END",                                              {"HIP_LAUNCH_PARAM_END",                                     "", CONV_DEFINE, API_DRIVER, 1}}, // ((void*)0x00)
